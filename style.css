@@ -1,0 +1,997 @@
+@font-face {
+    font-family: font;
+    src: url(SpaceGrotesk-Regular.woff2);
+}
+@font-face {
+    font-family: bold;
+    src: url(l);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing: border-box;
+font-family: font;
+}
+
+html,body{
+width: 100%;
+height: 100%;
+}
+html{
+    scroll-behavior: smooth;
+}
+main{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.cursor{
+    padding: 1.5rem;
+    border: 1px solid white;
+    border-radius: 50%;
+    position: fixed;
+    transition: all 0.1s linear;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    pointer-events: none;
+}
+.dot{
+    width: 5px;
+    padding: 5px;
+    border-radius: 50%;
+    position: fixed;
+    transition: all 0.1s linear;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    z-index: 999;
+    pointer-events: none;
+
+}
+
+.hover{
+    padding: 3rem;
+}
+
+.hero{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.6));
+    gap: 1.5rem;
+}
+.hero video{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    object-position: top;
+    z-index: -10;
+}
+.hero nav{
+    display: flex;
+    padding: 2rem 4rem;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    transition: all 0.7s ease;
+    z-index: 5;
+}
+.btn{
+    padding: 0.8rem 1.6rem;
+    background-color: transparent;
+    border: 3px solid #d72b59;
+    border-radius: 2rem;
+    color: white;
+    font-weight: 800;
+    font-family: bold;
+    cursor: pointer;    
+    position: relative;
+}
+.btn:active{
+    scale: 0.95;
+}
+.btn:hover.btn::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    border-radius: 2rem;
+    opacity: 0.6;
+    left: 50%;
+    width: 95%;
+    height: 90%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to right, #d72b59, #fae451);
+}
+.hero nav img{
+    width: 250px;
+    object-fit: contain;
+    margin-right: 3rem;
+    opacity: 0;
+    transition: all 0.7s ease;
+}
+.hero nav .right{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+.hero nav .right p{
+    font-size: 1rem;
+    cursor: pointer;
+}
+#presents{
+    width: 55rem;
+}
+span{
+    font-size: 4rem;
+    font-family: bold;
+    text-align: center;
+    background: linear-gradient(to right,#d72b59,#fae451);
+    background-clip: text;
+    color: transparent;
+}
+.hero span{
+    font-size: 3rem;
+}
+.hero p{
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+}
+.hero h1{
+    text-align: center;
+}
+.menu{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    background-color: #e86f4d;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transform: translateY(100%);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #eae5d0;
+    transition: all 0.9s ease;
+}
+.close p{
+    transition: all 0.9s ease;
+}
+.visible{
+    transform: translateY(0%);
+}
+.menu .left, .menu .right{
+    display: flex;
+    justify-content: center;
+}
+.menu .left{
+    width: 55%;
+    flex-direction: column;
+    padding: 8rem;
+    border-right: 1px solid rgba(234, 229, 208, 0.2);
+}
+.menu .left .menu-item{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: color 0.3s ease;
+    width: fit-content;
+}
+.menu .left .menu-item h5{
+    font-size: 1rem;
+}
+.menu .left .menu-item p{
+    font-weight: 600;
+    font-size: 3.5rem;
+}
+.menu .right{
+    width: 45%;
+}
+.menu .right .links-crs{
+    display: flex;
+    padding: 4rem 0;
+    gap: 1rem;
+}
+.menu .right .icon{
+    padding: 0.8rem 0.9rem;
+    border-radius: 50%;
+    background-color: rgba(234, 229, 208, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.menu .right i{
+    font-size: 1.5rem;
+}
+.menu .right:has(.icon:hover) .icon:not(:hover){
+    opacity: 0.5;
+}
+.close{
+    color: #191024;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    right: 5%;
+    top: 5%;
+    cursor: pointer;
+}
+.close p{
+    font-size: 2rem;
+}
+.menu .left .menu-item:hover{
+    color: #191024;
+}
+
+.content{
+    background-color: #191024;
+    color: #eae5d0;
+    display: flex;
+    flex-direction: column;
+}
+.view1, .view4, .view6, .view8{
+    position: relative;
+    overflow: hidden;
+}
+.view1 h1, .view4 h1, .view6 h1, .view8 h1{
+    padding: 8rem 4rem;
+    font-size: 4rem;
+    font-family: bold;
+    text-align: left;
+    line-height: 0.8;
+}
+.view1 span, .view8 span{
+    margin-left: 5rem;
+}
+.glimmer{
+    width: 4000px;
+    font-size: 14rem;
+    font-family: bold;
+    position: absolute;
+    opacity: 0.07;
+    z-index: 0;
+    top: 16%;
+}
+.content .view2, .view5{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+
+}
+.content .view2 .left, .content .view2 .right{
+    width: 50%;
+}
+.content .view2 .left img, .view5 .right img{
+    object-fit: contain;
+    width: 95%;
+}
+.content .view2 .right{
+    padding-left: 2rem;
+    border-left: 1px solid orange;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: fit-content;
+
+}
+.content .view2 .right p, .view5 .left p, .view6 #pera, .view8 #pera, .view9 #pera{
+    font-family: font;
+    font-size: 1.6rem;
+}
+
+.content .view3{
+    overflow: hidden;
+    position: relative;
+    height: 16rem;
+}
+.content .view3 h1{
+    text-align: center;
+    font-family: bold;
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 0.85;
+}
+.content .view3 span{
+    font-size: 6rem;
+    font-weight: 900;   
+}
+.content .view3 p{
+    top: -17%;
+    left: -30%;
+}
+.scroller{
+    display: flex;
+    overflow: auto;
+    overflow-y: hidden;
+}
+.scroller::-webkit-scrollbar{
+    width: 0px;
+}
+.card{
+    padding: 2rem;
+    position: relative;
+    transition: all 1s ease;
+}
+.card img{
+    width: 65vw;
+    margin-right: 20rem;
+}
+.info{
+    padding: 8rem 5rem;
+    background-color: #eae5d0;
+    color: #191024;
+    position: absolute;
+    width: 50%;
+    right: 5%;
+    bottom: 0;
+}
+.card h3{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #d72b59;
+    color: transparent;
+    font-size: 7rem;
+    font-family: bold;
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+}
+.controls{
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.controls .btns{
+    display: flex;
+    gap: 0;
+}
+.controls button{
+    padding: 1.3rem 1.8rem;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #d72b59;
+    border: 1px solid #d72b59;
+    z-index: 1;
+    cursor: pointer;
+}
+.controls .bar-cover{
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.1);
+    height: 1.5px;
+}
+.controls .bar{
+    width: 20%;
+    height: 100%;
+    background-color: #d72b59;
+}
+.view4, .view6, .view9{
+    justify-items: center;
+}
+.view4 h1, .view6 h1{
+    text-align: center;
+    width: 80%;
+    font-size: 5rem;
+    padding: 4rem 0;
+}
+.view4 span, .view6 span{
+    font-size: 5rem;
+}
+.view4 .glimmer, .view6 .glimmer{
+    top: 7%;
+    left: -70%;
+}
+.view5 .left{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding: 0 3rem;
+}
+.view5 h4{
+    font-size: 2.8rem;
+    font-weight: 100;
+}
+.view5 .left button{
+    width: fit-content;
+}
+.view5 .right{
+    width: 55%;
+}
+.view5 .left{
+    width: 45%;
+}
+.view6 h6, .view8 h6{
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    font-weight: 100;
+}
+.view6 .glimmer{
+    left: -130%;
+}
+.view6 #pera, .view9 #pera{
+    text-align: center;
+    width: 52%;
+}
+.view7{
+    width: 100%;
+    height: 40rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 3rem;
+    padding: 5rem 4rem;
+    z-index: 1;
+}
+.person{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+.view7 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s linear;
+}
+.view7 .person:hover img{
+    scale: 1.1;
+}
+.view7 h2{
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.person::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(25, 16, 36, 0.4);
+    left: 0;
+    top: 0;
+}
+.view8{
+    text-align: left;
+    display: flex;
+    padding: 4rem;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+.view8 .left{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 40%;
+}
+.view8 .btn{
+    width: fit-content;
+}
+.view8 h1{
+    padding: 0;
+}
+.view8 .right{
+    width: 60%;
+}
+.view8 .right img{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+.view8 .glimmer{
+    width: fit-content;
+    z-index: 0;
+    left: -170%;
+}
+.view9{
+    text-align: center;
+}
+.view9 span{
+    font-size: 5.5rem;
+    padding: 4rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.view9 img{
+    width: 15%;
+}
+.view9 .links-crs{
+    display: flex;
+    padding: 4rem 0;
+    gap: 1rem;
+}
+.view9 .icon{
+    padding: 1.6rem 1.7rem;
+    border-radius: 50%;
+    border: 1px solid #d72b59;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.view9 i{
+    font-size: 1.5rem;
+}
+.view9:has(.icon:hover) .icon:not(:hover){
+    opacity: 0.5;
+}
+footer{
+    background-color: #140d1e;
+    padding: 2rem;
+}
+footer .top{
+    display: flex;
+    justify-content: space-around;
+    padding: 6rem 0;
+}
+
+footer .top .left1{
+    width: 25%;
+}
+footer .top .left1 img{
+    width: 100%;
+    object-fit: contain;
+}
+footer .top .link-wrapper{
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    gap: 1rem;
+}
+footer a{
+    font-family: bold;
+    color: #eae5d0;
+    text-decoration: none;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+}
+footer .top a::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-150%, -50%);
+    width: 100%;
+    height: 4px;
+    border-radius: 5px;
+    background: linear-gradient(to right, #d72b59, #fae451);
+    transition: all 0.5s ease;
+}
+footer .top a:hover::after{
+    transform: translate(-50%, -50%);
+}
+footer .bottom{
+    padding-top: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(234, 229, 208, 0.2);
+    color: #eae5d0;
+}
+footer .bottom a{
+    font-family: font;
+    font-size: 1.2rem;
+}
+
+
+@media (min-width: 1440px) {
+    .hero span {
+        font-size: 4rem;
+    }
+
+    .view1 h1,
+    .view4 h1,
+    .view6 h1 {
+        font-size: 6rem;
+    }
+
+    .card img {
+        width: 55vw;
+    }
+}
+
+@media (max-width: 1023px) {
+    span {
+        font-size: 3.5rem;
+    }
+    #presents{
+        width: 35rem;
+    }
+    .hero p {
+        font-size: 1.4rem;
+    }
+    .hero nav{
+        padding: 1rem 2rem;
+    }
+    .btn{
+        padding: 0.4rem 0.8rem;
+        font-size: 0.5rem;
+    }
+    .hero nav img{
+        width: 100px;
+    }
+    .hero nav .right p{
+        font-size: 0.7rem;
+    }
+    .hero nav .right i{
+        font-size: 1rem;
+    }
+    .view1 h1,
+    .view4 h1,
+    .view6 h1{
+        height: 18rem;
+        font-size: 3.5rem;
+        padding: 5rem 2rem;
+    }
+    .view1 .glimmer{
+        left: 10%;
+    }
+    .view2, .view5, .view8, footer .top{
+        flex-direction: column;
+    }
+    .content .view2 .left, .content .view2 .right, .view5 .left, .view5 .right{
+        width: 100%;
+    }
+    .content .view3{
+        height: 16rem;
+    }
+    .content .view3 span{
+        font-size: 3.5rem;
+    }
+    .content .view3 h1{
+        font-size: 3.5rem;
+    }
+    .view4 .glimmer{
+        left: -150%;
+    }
+    .view4 span{
+        font-size: 3.5rem;
+    }
+    .view8 .left h1{
+        font-size: 3.5rem;
+    }
+    .view6 .glimmer{
+        left: -250%;
+    }
+    .view6 #pera{
+        width: 80%;
+    }
+    .menu {
+        top: 100vh;
+        flex-direction: column;
+    }
+    .menu .left,
+    .menu .right {
+        width: 100%;
+        padding: 4rem 2rem;
+        border: none;
+    }
+    .menu .right .links-crs{
+        padding: 0;
+    }
+
+    .menu .left .menu-item p {
+        font-size: 2.5rem;
+    }
+
+    .view7 {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .person {
+        height: 25rem;
+    }
+
+    .view8 .left,
+    .view8 .right {
+        width: 100%;
+    }
+
+    footer .top{
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    span {
+        font-size: 1.7rem;
+    }
+
+    /* Disable custom cursor on mobile */
+    .cursor,
+    .dot {
+        display: none;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+        padding: 0 1.5rem;
+        gap: 1.2rem;
+    }
+
+    #presents {
+        width: 22rem;
+    }
+
+    .hero span {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .hero nav {
+        padding: 0.8rem 1.2rem;
+    }
+
+    .hero nav img {
+        width: 90px;
+        margin-right: 0;
+    }
+
+    .hero nav .right {
+        gap: 0.4rem;
+    }
+
+    .hero nav .right i {
+        font-size: 1rem;
+    }
+
+    .hero nav .right p {
+        font-size: 0.6rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.6rem;
+        border-width: 2px;
+    }
+
+    /* ===== MENU ===== */
+    .menu {
+    top: 100vh;
+    transform: translateY(0);
+    }
+
+    .visible {
+    transform: translateY(-100vh);
+    }
+
+
+    .menu .left {
+        padding: 2rem 1.5rem;
+    }
+
+    .menu .left .menu-item {
+        gap: 1rem;
+    }
+
+    .menu .left .menu-item h5 {
+        font-size: 0.8rem;
+    }
+
+    .menu .left .menu-item p {
+        font-size: 1.8rem;
+    }
+
+    .menu .right {
+        padding: 2rem 0;
+    }
+
+    .close {
+        right: 6%;
+        top: 3%;
+    }
+
+    .close p {
+        font-size: 1.5rem;
+    }
+
+    /* ===== SECTION HEADINGS ===== */
+    .view1 h1,
+    .view4 h1,
+    .view6 h1,
+    .view8 .left h1 {
+        font-size: 1.7rem;
+        padding: 4rem 1.5rem 0 1.5rem;
+        height: 10rem;
+        text-align: center;
+    }
+
+    .view1 span,
+    .view8 span {
+        margin-left: 0;
+    }
+
+    .glimmer {
+        top: 3%;
+        font-size: 8rem;
+        width: 3000px;
+        left: -10%;
+    }
+    .view4 span, .view6 span{
+        font-size: 1.7rem;
+    }
+    .view4 .glimmer{
+        left: -230%;
+    }
+    .view6 .glimmer{
+        left: -280%;
+    }
+    .view8 .glimmer{
+        top: 8%;
+        left: -560%
+    }
+
+    /* ===== VIEW 2 ===== */
+    .content .view2 {
+        padding: 1.5rem;
+    }
+
+    .content .view2 .right {
+        padding-left: 0;
+        border-left: none;
+        gap: 1.2rem;
+    }
+
+    .content .view2 .right p {
+        font-size: 1.1rem;
+    }
+
+    /* ===== HOW TO PLAY ===== */
+    .content .view3 {
+        height: 12rem;
+        padding: 4rem 1.5rem 0 1.5rem;
+    }
+
+    .content .view3 h1,
+    .content .view3 span {
+        font-size: 1.7rem;
+    }
+    .content .view3 .glimmer{
+        font-size: 8rem;
+        top: 3%;
+        left: -100%;
+    }
+
+    /* ===== SCROLLER ===== */
+    .card {
+        width: 100vw;
+        padding: 1.5rem 1rem;
+    }
+
+    .card img {
+        width: 92vw;
+        margin-right: 3rem;
+    }
+
+    .info {
+        position: static;
+        width: 92vw;
+        padding: 2.5rem 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .card h3 {
+        font-size: 4rem;
+        top: 40%;
+        left: 50%;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .controls .bar-cover {
+        width: 90%;
+    }
+
+    /* ===== VIEW 5 ===== */
+    .view5 .left {
+        padding: 0 1.5rem;
+        gap: 1.8rem;
+    }
+
+    .view5 h4 {
+        font-size: 2rem;
+    }
+
+    .view5 .left p {
+        font-size: 1.1rem;
+    }
+
+    /* ===== VIEW 6 ===== */
+    .view6 h6,
+    .view8 h6 {
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+    }
+
+    .view6 #pera,
+    .view9 #pera {
+        width: 90%;
+        font-size: 1.1rem;
+    }
+
+    /* ===== TEAM CARDS ===== */
+    .view7 {
+        padding: 3rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .person {
+        height: 20rem;
+    }
+
+    .view7 h2 {
+        font-size: 1.2rem;
+    }
+
+    /* ===== VIEW 8 ===== */
+    .view8 {
+        padding: 3rem 1.5rem;
+        gap: 3rem;
+    }
+
+    /* ===== VIEW 9 ===== */
+    .view9 span {
+        font-size: 1.7rem;
+        padding: 3rem 0;
+    }
+
+    .view9 img {
+        width: 25%;
+    }
+
+    .view9 .links-crs {
+        padding: 3rem 0;
+    }
+
+    .view9 .icon {
+        padding: 1.2rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+        padding: 1.5rem;
+    }
+
+    footer .top {
+        padding: 3rem 0;
+    }
+
+    footer .top .left1 {
+        width: 60%;
+    }
+
+    footer .top .link-wrapper {
+        font-size: 1.2rem;
+        align-items: center;
+    }
+
+    footer .bottom {
+        font-size: 0.9rem;
+    }
+}
+
